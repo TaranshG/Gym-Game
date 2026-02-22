@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💪 Gym Simulator - Incremental Game</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>💪 GYM SIMULATOR 💪</h1>
+        <button id="helpBtn" class="help-btn">Help</button>
+    </header>
+
+    <main class="container">
+        <div class="left-column">
+            <!-- Scoreboard Panel -->
+            <section class="panel stats-panel">
+                <h2>📊 Stats</h2>
+                <div class="stat-item large-stat" id="totalReps">0 REPS</div>
+                <div class="stat-item">💪 Reps per click: <span id="repsPerClick">1</span></div>
+                <div class="stat-item">🤖 Auto-gym level: <span id="autoGymLevel">0</span></div>
+                <div class="stat-item">📈 Total upgrades: <span id="totalUpgrades">0</span></div>
+                <div class="progress-container">
+                    <div class="progress-label" id="progressLabel">Next: First Steps at 10 reps</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Click Area Panel -->
+            <section class="panel click-panel">
+                <h2>🏋️ Work Out!</h2>
+                <button id="workoutBtn" class="workout-btn">
+                    <span class="workout-emoji">🏋️</span>
+                </button>
+                <p class="instruction">Click to train!</p>
+                <div id="clickFeedback" class="click-feedback"></div>
+            </section>
+        </div>
+
+        <div class="right-column">
+            <!-- Upgrades Panel -->
+            <section class="panel upgrades-panel">
+                <h2>⬆️ Upgrades</h2>
+                <div id="upgradesContainer"></div>
+            </section>
+
+            <!-- Rewards Panel -->
+            <section class="panel rewards-panel">
+                <h2>🏆 Trophies <span id="rewardCount">(0/5)</span></h2>
+                <div id="rewardsContainer"></div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Message Area for Notifications -->
+    <div id="messageArea" class="message-area"></div>
+
+    <!-- Congratulations Popup -->
+    <div id="congratsPopup" class="congrats-popup hidden"></div>
+
+    <!-- Help Panel -->
+    <div id="helpPanel" class="help-panel hidden">
+        <div class="help-content">
+            <button id="closeHelp" class="close-help">&times;</button>
+            <h2>📖 How to Play</h2>
+            <p>Welcome to Gym Simulator! Click the workout button to earn reps. Use your reps to buy upgrades that make you stronger!</p>
+            
+            <h3>🛒 Upgrades</h3>
+            <ul id="helpUpgradesList"></ul>
+
+            <h3>🏆 Rewards</h3>
+            <ul id="helpRewardsList"></ul>
+
+            <h3>💾 Save/Load</h3>
+            <p>Your progress is automatically saved to your browser. You can reset your progress below:</p>
+            <button id="resetBtn" class="reset-btn">Reset Save</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
