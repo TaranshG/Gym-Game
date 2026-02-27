@@ -1,10 +1,11 @@
 /**
  * Gym Simulator - Incremental Game
  * Main game logic and state management
- * Author: Teaching Assistant
+ * Author: Rehan Patel, Taransh Goyal 
+ * Date: February 27, 2026
  * Course: Intro Web Dev
  * 
- * This file manages:
+ * * This file manages:
  * - Game state (model)
  * - DOM manipulation (view)
  * - Event handlers (controller)
@@ -517,16 +518,23 @@ function loadGame() {
 }
 
 /**
- * Reset game to initial state
+ * Opens the reset confirmation modal to warn the user before deleting save data.
  */
 function openResetModal() {
   document.getElementById('resetModal').classList.remove('hidden');
 }
 
+/**
+ * Closes the reset confirmation modal without deleting any save data.
+ */
 function closeResetModal() {
   document.getElementById('resetModal').classList.add('hidden');
 }
 
+/**
+ * Performs a complete reset of the game. Clears localStorage, stops auto-gym intervals, 
+ * resets all variables to 0, and updates the DOM to reflect the wiped state.
+ */
 function performReset() {
   localStorage.removeItem('gymSimulatorSave');
 
