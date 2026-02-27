@@ -506,3 +506,34 @@ header h1 {
         margin: 20px auto;
     }
 }
+
+/* Reset Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal.hidden { display: none; }
+
+.modal-card {
+  width: 100%;
+  max-width: 520px;
+  background: #1a1a1a;
+  border: 2px solid #ff6b6b;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 18px;
+}

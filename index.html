@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>💪 Gym Simulator - Incremental Game</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
+    
 </head>
 <body>
     <header>
@@ -79,6 +81,19 @@
             <button id="resetBtn" class="reset-btn">Reset Save</button>
         </div>
     </div>
+    
+    <!-- Reset Confirmation Modal -->
+<div id="resetModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="resetTitle">
+  <div class="modal-card">
+    <h2 id="resetTitle">Reset progress?</h2>
+    <p>This will erase your save permanently.</p>
+
+    <div class="modal-actions">
+      <button id="cancelReset" class="help-btn" type="button">Cancel</button>
+      <button id="confirmReset" class="reset-btn" type="button">Yes, reset</button>
+    </div>
+  </div>
+</div>
 
     <script src="js/script.js"></script>
 </body>

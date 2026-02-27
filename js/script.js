@@ -518,34 +518,40 @@ function loadGame() {
 /**
  * Reset game to initial state
  */
-function resetGame() {
-    if (confirm('Are you sure you want to reset all progress? This cannot be undone!')) {
-        localStorage.removeItem('gymSimulatorSave');
-        
-        // Clear auto-click interval
-        if (autoClickIntervalId) {
-            clearInterval(autoClickIntervalId);
-            autoClickIntervalId = null;
-        }
-        
-        // Reset state
-        reps = 0;
-        repsPerClick = 1;
-        totalClicks = 0;
-        autoGymLevel = 0;
-        
-        upgrades.forEach(upgrade => {
-            upgrade.owned = 0;
-        });
-        
-        rewards.forEach(reward => {
-            reward.earned = false;
-        });
-        
-        updateDisplay();
-        renderRewards();
-        toggleHelp();
-    }
+function openResetModal() {
+  document.getElementById('resetModal').classList.remove('hidden');
+}
+
+function closeResetModal() {
+  document.getElementById('resetModal').classList.add('hidden');
+}
+
+function performReset() {
+  localStorage.removeItem('gymSimulatorSave');
+
+  // Clear auto-click interval
+  if (autoClickIntervalId) {
+    clearInterval(autoClickIntervalId);
+    autoClickIntervalId = null;
+  }
+
+  // Reset state
+  reps = 0;
+  repsPerClick = 1;
+  totalClicks = 0;
+  autoGymLevel = 0;
+
+  upgrades.forEach(u => { u.owned = 0; });
+  rewards.forEach(r => { r.earned = false; });
+
+  updateDisplay();
+  renderRewards();
+
+  // Don’t toggle (could accidentally open help); just ensure closed
+  document.getElementById('helpPanel').classList.add('hidden');
+
+  showMessage('Progress reset.', 'success');
+  closeResetModal();
 }
 
 // ==================== INITIALIZATION ====================
@@ -561,7 +567,9 @@ window.addEventListener('load', () => {
     document.getElementById('workoutBtn').addEventListener('click', handleWorkout);
     document.getElementById('helpBtn').addEventListener('click', toggleHelp);
     document.getElementById('closeHelp').addEventListener('click', toggleHelp);
-    document.getElementById('resetBtn').addEventListener('click', resetGame);
+    document.getElementById('resetBtn').addEventListener('click', openResetModal);
+    document.getElementById('cancelReset').addEventListener('click', closeResetModal);
+    document.getElementById('confirmReset').addEventListener('click', performReset);
     
     // Initial render
     updateDisplay();
