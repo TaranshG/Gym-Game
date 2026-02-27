@@ -362,8 +362,9 @@ function showFloatingText(text, element) {
     floatingText.textContent = text;
     
     const rect = element.getBoundingClientRect();
-    floatingText.style.left = `${rect.left + rect.width / 2}px`;
-    floatingText.style.top = `${rect.top}px`;
+    floatingText.style.left = `${rect.left + rect.width / 2 + window.scrollX}px`;
+    floatingText.style.top = `${rect.top + window.scrollY}px`;
+    floatingText.style.transform = 'translateX(-50%)'; // center it nicely
     
     document.body.appendChild(floatingText);
     
