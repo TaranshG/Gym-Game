@@ -1,17 +1,8 @@
 <!--
-    Gym Simulator - Incremental Game
-    Main HTML Structure for dark dashboard interface
-    Author: Rehan Patel, Taransh Goyal
-    Date: February 27, 2026
-    Course: Intro Web Dev
-
-    This file manages:
-    - Overall page layout and structure
-    - Game panels (Stats, Workout, Upgrades, Rewards)
-    - Interactive UI elements (buttons, modals, popups)
-    - Help system and reset confirmation modal
+    Gym Simulator - Incremental Game (Enhanced)
+    Authors: Rehan Patel, Taransh Goyal
+    Enhanced with: random events, prestige, offline progress, combo system, humor
 -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,23 +10,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>💪 Gym Simulator - Incremental Game</title>
     <link rel="stylesheet" href="css/styles.css">
-    
 </head>
 <body>
     <header>
         <h1>💪 GYM SIMULATOR 💪</h1>
-        <button id="helpBtn" class="help-btn">Help</button>
+        <div class="header-buttons">
+            <button id="goProBtn" class="go-pro-btn hidden">🌟 GO PRO</button>
+            <button id="helpBtn" class="help-btn">Help</button>
+        </div>
     </header>
+
+    <!-- Random Event Banner -->
+    <div id="eventBanner" class="event-banner hidden"></div>
 
     <main class="container">
         <div class="left-column">
-            <!-- Scoreboard Panel -->
+            <!-- Stats Panel -->
             <section class="panel stats-panel">
                 <h2>📊 Stats</h2>
                 <div class="stat-item large-stat" id="totalReps">0 REPS</div>
-                <div class="stat-item">💪 Reps per click: <span id="repsPerClick">1</span></div>
-                <div class="stat-item">🤖 Auto-gym level: <span id="autoGymLevel">0</span></div>
-                <div class="stat-item">📈 Total upgrades: <span id="totalUpgrades">0</span></div>
+                <div id="prestigeTitle" class="prestige-title">Gym Newbie (x1.0 gains)</div>
+                <div class="stats-grid">
+                    <div class="stat-item">💪 Per click: <span id="repsPerClick">1</span></div>
+                    <div class="stat-item">⚡ Per sec: <span id="repsPerSecond">0</span></div>
+                    <div class="stat-item">🤖 Auto-gym: <span id="autoGymLevel">0</span></div>
+                    <div class="stat-item">📈 Upgrades: <span id="totalUpgrades">0</span></div>
+                    <div class="stat-item">🌟 Prestiges: <span id="prestigeCount">0</span></div>
+                </div>
                 <div class="progress-container">
                     <div class="progress-label" id="progressLabel">Next: First Steps at 10 reps</div>
                     <div class="progress-bar">
@@ -44,13 +45,14 @@
                 </div>
             </section>
 
-            <!-- Click Area Panel -->
+            <!-- Click Panel -->
             <section class="panel click-panel">
                 <h2>🏋️ Work Out!</h2>
                 <button id="workoutBtn" class="workout-btn">
                     <span class="workout-emoji">🏋️</span>
                 </button>
                 <p class="instruction">Click to train!</p>
+                <div id="comboDisplay" class="combo-display hidden"></div>
                 <div id="clickFeedback" class="click-feedback"></div>
             </section>
         </div>
@@ -64,16 +66,16 @@
 
             <!-- Rewards Panel -->
             <section class="panel rewards-panel">
-                <h2>🏆 Trophies <span id="rewardCount">(0/5)</span></h2>
+                <h2>🏆 Trophies <span id="rewardCount">(0/8)</span></h2>
                 <div id="rewardsContainer"></div>
             </section>
         </div>
     </main>
 
-    <!-- Message Area for Notifications -->
+    <!-- Message Area -->
     <div id="messageArea" class="message-area"></div>
 
-    <!-- Congratulations Popup -->
+    <!-- Congrats Popup -->
     <div id="congratsPopup" class="congrats-popup hidden"></div>
 
     <!-- Help Panel -->
@@ -81,8 +83,17 @@
         <div class="help-content">
             <button id="closeHelp" class="close-help">&times;</button>
             <h2>📖 How to Play</h2>
-            <p>Welcome to Gym Simulator! Click the workout button to earn reps. Use your reps to buy upgrades that make you stronger!</p>
-            
+            <p>Welcome to Gym Simulator! Click the workout button to earn reps. Buy upgrades to get stronger. Reach 10,000 reps to Go Pro and earn a permanent gains multiplier!</p>
+
+            <h3>🔥 Combo System</h3>
+            <p>Click fast to build a streak! Every 3 clicks in a row multiplies your gains. Slow down and it resets.</p>
+
+            <h3>⚡ Random Events</h3>
+            <p>Every 30–90 seconds, something happens at the gym. Could be good, could be bad. Stay alert.</p>
+
+            <h3>🌟 Prestige (Go Pro)</h3>
+            <p>At 10,000 reps you can "Go Pro" — reset everything but keep a permanent gains multiplier that stacks each time. Earn prestige titles from Gym Newbie to Gains God.</p>
+
             <h3>🛒 Upgrades</h3>
             <ul id="helpUpgradesList"></ul>
 
@@ -90,23 +101,47 @@
             <ul id="helpRewardsList"></ul>
 
             <h3>💾 Save/Load</h3>
-            <p>Your progress is automatically saved to your browser. You can reset your progress below:</p>
+            <p>Auto-saved to your browser. Offline progress is calculated when you return (up to 8 hours).</p>
             <button id="resetBtn" class="reset-btn">Reset Save</button>
         </div>
     </div>
-    
-    <!-- Reset Confirmation Modal -->
-<div id="resetModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="resetTitle">
-  <div class="modal-card">
-    <h2 id="resetTitle">Reset progress?</h2>
-    <p>This will erase your save permanently.</p>
 
-    <div class="modal-actions">
-      <button id="cancelReset" class="help-btn" type="button">Cancel</button>
-      <button id="confirmReset" class="reset-btn" type="button">Yes, reset</button>
+    <!-- Reset Modal -->
+    <div id="resetModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="resetTitle">
+        <div class="modal-card">
+            <h2 id="resetTitle">Reset progress?</h2>
+            <p>This will erase your save permanently. Even your prestige count.</p>
+            <div class="modal-actions">
+                <button id="cancelReset" class="help-btn" type="button">Cancel</button>
+                <button id="confirmReset" class="reset-btn" type="button">Yes, reset</button>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+
+    <!-- Prestige Modal -->
+    <div id="prestigeModal" class="modal hidden" role="dialog" aria-modal="true">
+        <div class="modal-card prestige-card">
+            <h2>🌟 Go Pro?</h2>
+            <p>You've earned it. Reset your progress, but gain a <strong>permanent +50% gains multiplier</strong>. It stacks every time you Go Pro.</p>
+            <p style="color:#ffd700;margin-top:8px;">Your gym title will evolve. The grind never stops.</p>
+            <div class="modal-actions">
+                <button id="cancelPrestige" class="help-btn" type="button">Not Yet</button>
+                <button id="confirmPrestige" class="go-pro-btn" type="button">GO PRO 🌟</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Offline Progress Modal -->
+    <div id="offlineModal" class="modal hidden" role="dialog" aria-modal="true">
+        <div class="modal-card offline-card">
+            <h2>😴 You Were Away!</h2>
+            <p>Your gym-bot kept grinding for <strong id="offlineTime">0 minutes</strong>.</p>
+            <p style="color:#4ecdc4;font-size:1.3rem;font-weight:bold;margin-top:12px;">+<span id="offlineEarned">0</span> REPS earned!</p>
+            <div class="modal-actions">
+                <button id="closeOfflineModal" class="help-btn" type="button">Hell yeah! 💪</button>
+            </div>
+        </div>
+    </div>
 
     <script src="js/script.js"></script>
 </body>
