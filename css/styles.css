@@ -29,14 +29,14 @@ body {
 /* === HEADER === */
 header {
   background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-  padding: 14px 16px; /* smaller */
+  padding: 14px 16px; 
   text-align: center;
   border-bottom: 3px solid #ff6b6b;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 header h1 {
-  font-size: 2.05rem; /* smaller */
+  font-size: 2.05rem; 
   color: #ff6b6b;
   margin-bottom: 8px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -46,7 +46,7 @@ header h1 {
   background-color: #444;
   color: #fff;
   border: none;
-  padding: 8px 16px; /* smaller */
+  padding: 8px 16px; 
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.95rem;
@@ -59,14 +59,14 @@ header h1 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* === MAIN CONTAINER (COMPACT) === */
+/* === MAIN CONTAINER === */
 .container {
-  max-width: 1050px; /* tighter */
-  margin: 10px auto; /* smaller */
-  padding: 0 16px; /* slightly smaller */
+  max-width: 1050px; 
+  margin: 10px auto; 
+  padding: 0 16px; 
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px; /* smaller gap */
+  gap: 14px; 
   align-items: start;
 }
 
@@ -74,14 +74,14 @@ header h1 {
 .panel {
   background-color: #1a1a1a;
   border-radius: 12px;
-  padding: 12px 16px; /* smaller */
+  padding: 12px 16px; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   border: 2px solid #333;
 }
 
 .panel h2 {
   margin-bottom: 10px;
-  font-size: 1.25rem; /* smaller */
+  font-size: 1.25rem; 
   border-bottom: 2px solid #444;
   padding-bottom: 8px;
 }
@@ -95,12 +95,12 @@ header h1 {
 }
 
 .stat-item {
-  margin: 6px 0; /* tighter */
-  font-size: 1rem; /* slightly smaller */
+  margin: 6px 0; 
+  font-size: 1rem; 
 }
 
 .large-stat {
-  font-size: 1.65rem; /* smaller */
+  font-size: 1.65rem; 
   font-weight: bold;
   color: #4ecdc4;
   margin: 8px 0 10px;
@@ -111,7 +111,7 @@ header h1 {
   font-weight: bold;
 }
 
-/* Progress Bar (smaller) */
+/* Progress Bar */
 .progress-container {
   margin-top: 12px;
 }
@@ -123,7 +123,7 @@ header h1 {
 
 .progress-bar {
   width: 100%;
-  height: 20px; /* smaller */
+  height: 20px; 
   background-color: #333;
   border-radius: 12px;
   overflow: hidden;
@@ -151,12 +151,12 @@ header h1 {
   background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
   border: 3px solid #4ecdc4;
   border-radius: 18px;
-  padding: 18px; /* MUCH smaller */
+  padding: 18px; 
   cursor: pointer;
   transition: all 0.2s ease;
-  margin: 14px 0 10px; /* tighter */
+  margin: 14px 0 10px; 
   width: 100%;
-  max-width: 230px; /* smaller */
+  max-width: 230px; 
   box-shadow: 0 6px 12px rgba(78, 205, 196, 0.25);
 }
 
@@ -170,25 +170,25 @@ header h1 {
 }
 
 .workout-emoji {
-  font-size: 3.9rem; /* smaller */
+  font-size: 3.9rem; 
   display: block;
 }
 
 .instruction {
   color: #aaa;
-  font-size: 1rem; /* smaller */
+  font-size: 1rem; 
   margin-top: 6px;
 }
 
 .click-feedback {
-  min-height: 22px; /* smaller */
+  min-height: 22px; 
   position: relative;
 }
 
 /* Floating feedback animation */
 .floating-text {
   position: absolute;
-  font-size: 1.25rem; /* smaller */
+  font-size: 1.25rem; 
   font-weight: bold;
   color: #4ecdc4;
   animation: floatUp 1s ease-out forwards;
@@ -217,13 +217,13 @@ header h1 {
 #upgradesContainer {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* tighter */
+  gap: 10px; 
 }
 
 .upgrade-card {
   background-color: #252525;
   border-radius: 10px;
-  padding: 10px 12px; /* smaller */
+  padding: 10px 12px; 
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -247,20 +247,20 @@ header h1 {
 }
 
 .upgrade-name {
-  font-size: 1.05rem; /* smaller */
+  font-size: 1.05rem; 
   font-weight: bold;
   color: #fff;
   margin-bottom: 4px;
 }
 
 .upgrade-description {
-  font-size: 0.85rem; /* smaller */
+  font-size: 0.85rem; 
   color: #aaa;
   margin-bottom: 4px;
 }
 
 .upgrade-owned {
-  font-size: 0.8rem; /* smaller */
+  font-size: 0.8rem; 
   color: #4ecdc4;
 }
 
@@ -268,14 +268,14 @@ header h1 {
   background-color: #4ecdc4;
   color: #111;
   border: none;
-  padding: 9px 14px; /* smaller */
+  padding: 9px 14px; 
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
   font-size: 0.95rem;
   transition: all 0.3s ease;
   white-space: nowrap;
-  min-width: 92px; /* consistent width */
+  min-width: 92px; 
 }
 
 .upgrade-buy-btn:hover:not(:disabled) {
@@ -305,14 +305,14 @@ header h1 {
 
 #rewardsContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); /* smaller tiles */
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); 
   gap: 8px;
 }
 
 .reward-badge {
   background-color: #252525;
   border-radius: 10px;
-  padding: 8px; /* smaller */
+  padding: 8px; 
   text-align: center;
   border: 2px solid #444;
   transition: all 0.3s ease;
@@ -329,13 +329,13 @@ header h1 {
 }
 
 .reward-icon {
-  font-size: 1.7rem; /* smaller */
+  font-size: 1.7rem; 
   display: block;
   margin-bottom: 4px;
 }
 
 .reward-name {
-  font-size: 0.72rem; /* smaller */
+  font-size: 0.72rem; 
   color: #fff;
   word-wrap: break-word;
 }
@@ -347,7 +347,7 @@ header h1 {
   right: 16px;
   background-color: #ff6b6b;
   color: #fff;
-  padding: 12px 16px; /* smaller */
+  padding: 12px 16px; 
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   font-weight: bold;
@@ -370,9 +370,9 @@ header h1 {
   transform: translate(-50%, -50%);
   background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
   color: #111;
-  padding: 28px 40px; /* smaller */
+  padding: 28px 40px; 
   border-radius: 18px;
-  font-size: 1.5rem; /* smaller */
+  font-size: 1.5rem; 
   font-weight: bold;
   box-shadow: 0 0 50px rgba(255, 215, 0, 0.75);
   z-index: 200;
@@ -394,7 +394,7 @@ header h1 {
   background-color: rgba(0, 0, 0, 0.9);
   z-index: 300;
   overflow-y: auto;
-  padding: 18px; /* smaller */
+  padding: 18px; 
 }
 
 .help-panel.hidden {
@@ -403,9 +403,9 @@ header h1 {
 
 .help-content {
   max-width: 760px;
-  margin: 30px auto; /* smaller */
+  margin: 30px auto; 
   background-color: #1a1a1a;
-  padding: 22px; /* smaller */
+  padding: 22px; 
   border-radius: 12px;
   border: 2px solid #ff6b6b;
   position: relative;
@@ -466,7 +466,7 @@ header h1 {
   background-color: #ff6b6b;
   color: #fff;
   border: none;
-  padding: 10px 20px; /* smaller */
+  padding: 10px 20px; 
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
