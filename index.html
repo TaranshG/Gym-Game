@@ -1,42 +1,52 @@
 <!--
-    Gym Simulator - Incremental Game (Enhanced)
-    Authors: Rehan Patel, Taransh Goyal
-    Enhanced with: random events, prestige, offline progress, combo system, humor
+    GYM SIMULATOR — GRIND MODE
+    Full addictive loop implementation
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💪 Gym Simulator - Incremental Game</title>
+    <title>💪 Gym Simulator — Grind Mode</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <header>
-        <h1>💪 GYM SIMULATOR 💪</h1>
+        <h1>💪 GYM SIMULATOR</h1>
         <div class="header-buttons">
+            <button id="ascendBtn" class="ascend-btn hidden">✨ ASCEND</button>
             <button id="goProBtn" class="go-pro-btn hidden">🌟 GO PRO</button>
+            <button id="gymCorpTab" class="gymcorp-tab-btn">🏢 Gym Corp <span id="gymCoinCountHeader"></span></button>
             <button id="helpBtn" class="help-btn">Help</button>
         </div>
     </header>
 
-    <!-- Random Event Banner -->
+    <!-- Event Banner -->
     <div id="eventBanner" class="event-banner hidden"></div>
 
     <main class="container">
+        <!-- LEFT COLUMN -->
         <div class="left-column">
+
             <!-- Stats Panel -->
             <section class="panel stats-panel">
                 <h2>📊 Stats</h2>
-                <div class="stat-item large-stat" id="totalReps">0 REPS</div>
+                <div class="large-stat" id="totalReps">0 REPS</div>
                 <div id="prestigeTitle" class="prestige-title">Gym Newbie (x1.0 gains)</div>
                 <div class="stats-grid">
                     <div class="stat-item">💪 Per click: <span id="repsPerClick">1</span></div>
                     <div class="stat-item">⚡ Per sec: <span id="repsPerSecond">0</span></div>
-                    <div class="stat-item">🤖 Auto-gym: <span id="autoGymLevel">0</span></div>
+                    <div class="stat-item">🤖 Auto lvl: <span id="autoGymLevel">0</span></div>
                     <div class="stat-item">📈 Upgrades: <span id="totalUpgrades">0</span></div>
                     <div class="stat-item">🌟 Prestiges: <span id="prestigeCount">0</span></div>
+                    <div class="stat-item">✨ Stars: <span id="ascensionStars">—</span></div>
+                    <div class="stat-item">🏆 Lifetime: <span id="lifetimeReps">0</span></div>
+                    <div class="stat-item">🪙 GymCoins: <span id="gymCoinCount">0</span></div>
                 </div>
+                <div id="mirrorStat" class="mirror-stat">🪞 Body Fat: 35.0%</div>
+                <div id="momentumDisplay" class="momentum-display">⚡ Momentum: 0/25 (+0%)</div>
+                <div id="restXpDisplay" class="rest-xp-display hidden">😴 Rest Bonus: x2 (0s)</div>
+                <div id="dailyGoalDisplay" class="daily-goal-display"></div>
                 <div class="progress-container">
                     <div class="progress-label" id="progressLabel">Next: First Steps at 10 reps</div>
                     <div class="progress-bar">
@@ -48,29 +58,66 @@
             <!-- Click Panel -->
             <section class="panel click-panel">
                 <h2>🏋️ Work Out!</h2>
-                <button id="workoutBtn" class="workout-btn">
+                <button id="workoutBtn" class="workout-btn" aria-label="Click to work out">
                     <span class="workout-emoji">🏋️</span>
                 </button>
                 <p class="instruction">Click to train!</p>
                 <div id="comboDisplay" class="combo-display hidden"></div>
-                <div id="clickFeedback" class="click-feedback"></div>
+
+                <!-- Gym Vibes Radio -->
+                <div class="radio-panel">
+                    <div class="radio-label">📻 Gym Vibes Radio</div>
+                    <div class="radio-buttons">
+                        <button id="radio-rock"  class="radio-btn">🎸 Rock</button>
+                        <button id="radio-lofi"  class="radio-btn">🎵 Lo-fi</button>
+                        <button id="radio-metal" class="radio-btn">🤘 Metal</button>
+                    </div>
+                </div>
             </section>
+
         </div>
 
+        <!-- RIGHT COLUMN -->
         <div class="right-column">
+
             <!-- Upgrades Panel -->
             <section class="panel upgrades-panel">
-                <h2>⬆️ Upgrades</h2>
+                <h2>⬆️ Upgrades
+                    <span class="synergy-legend">
+                        <span class="syn-click">■ Click</span>
+                        <span class="syn-auto">■ Auto</span>
+                        <span class="syn-combo">■ Combo</span>
+                        <span class="syn-chaos">■ Chaos</span>
+                    </span>
+                </h2>
                 <div id="upgradesContainer"></div>
             </section>
 
             <!-- Rewards Panel -->
             <section class="panel rewards-panel">
-                <h2>🏆 Trophies <span id="rewardCount">(0/8)</span></h2>
+                <h2>🏆 Trophies <span id="rewardCount">(0/15)</span></h2>
                 <div id="rewardsContainer"></div>
+                <!-- Impossible dream progress -->
+                <div class="dream-bar-container">
+                    <div class="dream-label">🌌 Become The Gym — 1 Quadrillion Reps</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill dream-fill" id="dreamFill"></div>
+                    </div>
+                </div>
             </section>
+
         </div>
     </main>
+
+    <!-- Gym Corp Panel (full-width overlay) -->
+    <div id="gymCorpPanel" class="gymcorp-panel hidden">
+        <div class="gymcorp-header">
+            <h2>🏢 Gym Corp — Permanent Upgrades</h2>
+            <p class="gymcorp-sub">Spend 🪙 GymCoins earned from Go Pro. These <strong>never reset</strong>.</p>
+            <div class="gymcorp-coins">Your GymCoins: <span id="gymCoinCount2">0</span> 🪙</div>
+        </div>
+        <div id="gymCorpContainer" class="gymcorp-container"></div>
+    </div>
 
     <!-- Message Area -->
     <div id="messageArea" class="message-area"></div>
@@ -78,67 +125,102 @@
     <!-- Congrats Popup -->
     <div id="congratsPopup" class="congrats-popup hidden"></div>
 
-    <!-- Help Panel -->
+    <!-- ====== MODALS ====== -->
+
+    <!-- Help Modal -->
     <div id="helpPanel" class="help-panel hidden">
         <div class="help-content">
             <button id="closeHelp" class="close-help">&times;</button>
             <h2>📖 How to Play</h2>
-            <p>Welcome to Gym Simulator! Click the workout button to earn reps. Buy upgrades to get stronger. Reach 10,000 reps to Go Pro and earn a permanent gains multiplier!</p>
+            <p>Click the workout button to earn reps. Buy upgrades to get stronger. Each system stacks — find the build that fits your style.</p>
 
-            <h3>🔥 Combo System</h3>
-            <p>Click fast to build a streak! Every 3 clicks in a row multiplies your gains. Slow down and it resets.</p>
+            <h3>🔥 Combo</h3>
+            <p>Click fast (within the combo window) to build a streak. Every 3 streak adds +0.25x to click power. The Rhythm Training upgrade doubles the cap. Metal station adds +25% more.</p>
 
-            <h3>⚡ Random Events</h3>
-            <p>Every 30–90 seconds, something happens at the gym. Could be good, could be bad. Stay alert.</p>
+            <h3>⚡ Momentum</h3>
+            <p>Every 10 minutes of active play: +2% all gains. Max +50% at 25 ticks. Resets on page close. Rewards you for long sessions.</p>
 
-            <h3>🌟 Prestige (Go Pro)</h3>
-            <p>At 10,000 reps you can "Go Pro" — reset everything but keep a permanent gains multiplier that stacks each time. Earn prestige titles from Gym Newbie to Gains God.</p>
+            <h3>🌟 Go Pro (Prestige)</h3>
+            <p>At 10,000 reps you can Go Pro — reset everything but earn a permanent +50% gains multiplier AND GymCoins. Titles evolve: Newbie → Regular → Swole → Shredded → Certified Gym Rat → Absolute Unit → Ascended Chad → The Gains God.</p>
+
+            <h3>🪙 GymCoins + Gym Corp</h3>
+            <p>Going Pro earns GymCoins based on your lifetime reps. Spend them in Gym Corp on permanent upgrades that carry across all runs forever.</p>
+
+            <h3>✨ Ascension</h3>
+            <p>After 10 Go Pros, you can Ascend — a mega reset that wipes GymCoins and prestiges but grants a permanent Ascension Star. Each star doubles ALL gains. Max 5 stars. This is the true endgame.</p>
+
+            <h3>👹 Gains Goblin</h3>
+            <p>Random 3% chance: a goblin steals 5% of your reps. Click fast for 15 seconds to recover them + 50% interest. Miss it and it's gone.</p>
+
+            <h3>📻 Gym Vibes Radio</h3>
+            <p>Pick a station: Rock (+15% click), Lo-fi (+20% auto), Metal (+25% combo). Toggle off by clicking again. Free. No reason it works. It just does.</p>
+
+            <h3>🌀 Build Synergies</h3>
+            <p>Click upgrades: every 10 owned = +10% click bonus. Auto upgrades: every 5 owned = +5% auto bonus. Own 4+ chaos upgrades to unlock a random 0.5–10x Chaos Synergy that rerolls every 60 seconds.</p>
+
+            <h3>🌌 Impossible Dream</h3>
+            <p>1 Quadrillion reps. The progress bar is visible from day 1. It always mocks you. This is the north star.</p>
 
             <h3>🛒 Upgrades</h3>
             <ul id="helpUpgradesList"></ul>
-
             <h3>🏆 Rewards</h3>
             <ul id="helpRewardsList"></ul>
 
-            <h3>💾 Save/Load</h3>
-            <p>Auto-saved to your browser. Offline progress is calculated when you return (up to 8 hours).</p>
-            <button id="resetBtn" class="reset-btn">Reset Save</button>
+            <h3>💾 Save</h3>
+            <p>Auto-saves every 30 seconds and on key actions. Offline income calculated on return (up to 8 hours). Rest Bonus activates on return.</p>
+            <button id="resetBtn" class="reset-btn">Reset All Progress</button>
         </div>
     </div>
 
     <!-- Reset Modal -->
-    <div id="resetModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="resetTitle">
+    <div id="resetModal" class="modal hidden">
         <div class="modal-card">
-            <h2 id="resetTitle">Reset progress?</h2>
-            <p>This will erase your save permanently. Even your prestige count.</p>
+            <h2>💀 Full Reset?</h2>
+            <p>This wipes <strong>everything</strong> — reps, GymCoins, prestige count, Ascension Stars, lifetime reps, secret achievements. Permanently.</p>
+            <p style="color:#ff6b6b;margin-top:8px;">There is no going back.</p>
             <div class="modal-actions">
-                <button id="cancelReset" class="help-btn" type="button">Cancel</button>
-                <button id="confirmReset" class="reset-btn" type="button">Yes, reset</button>
+                <button id="cancelReset" class="help-btn">Cancel</button>
+                <button id="confirmReset" class="reset-btn">Yes, nuke it all</button>
             </div>
         </div>
     </div>
 
     <!-- Prestige Modal -->
-    <div id="prestigeModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div id="prestigeModal" class="modal hidden">
         <div class="modal-card prestige-card">
             <h2>🌟 Go Pro?</h2>
-            <p>You've earned it. Reset your progress, but gain a <strong>permanent +50% gains multiplier</strong>. It stacks every time you Go Pro.</p>
-            <p style="color:#ffd700;margin-top:8px;">Your gym title will evolve. The grind never stops.</p>
+            <p>Reset your current run. Gain a permanent <strong>+50% gains multiplier</strong> that stacks forever.</p>
+            <p id="prestigeCoinsPreview" style="color:#ffd700;margin-top:8px;font-weight:700;">Will earn: ~0 🪙 GymCoins</p>
+            <p style="color:#888;font-size:0.85rem;margin-top:6px;">GymCoins are spent in Gym Corp on permanent upgrades.</p>
             <div class="modal-actions">
-                <button id="cancelPrestige" class="help-btn" type="button">Not Yet</button>
-                <button id="confirmPrestige" class="go-pro-btn" type="button">GO PRO 🌟</button>
+                <button id="cancelPrestige" class="help-btn">Not Yet</button>
+                <button id="confirmPrestige" class="go-pro-btn">GO PRO 🌟</button>
             </div>
         </div>
     </div>
 
-    <!-- Offline Progress Modal -->
-    <div id="offlineModal" class="modal hidden" role="dialog" aria-modal="true">
-        <div class="modal-card offline-card">
-            <h2>😴 You Were Away!</h2>
-            <p>Your gym-bot kept grinding for <strong id="offlineTime">0 minutes</strong>.</p>
-            <p style="color:#4ecdc4;font-size:1.3rem;font-weight:bold;margin-top:12px;">+<span id="offlineEarned">0</span> REPS earned!</p>
+    <!-- Ascension Modal -->
+    <div id="ascensionModal" class="modal hidden">
+        <div class="modal-card ascension-card">
+            <h2>✨ ASCEND?</h2>
+            <p>Wipe <strong>everything</strong> — prestiges, GymCoins, Gym Corp upgrades. But gain an <strong>Ascension Star</strong> that permanently <strong>doubles ALL gains</strong>.</p>
+            <p style="color:#da70d6;margin-top:8px;font-weight:700;">Max 5 stars. Each one is a new universe of gains.</p>
             <div class="modal-actions">
-                <button id="closeOfflineModal" class="help-btn" type="button">Hell yeah! 💪</button>
+                <button id="cancelAscension" class="help-btn">I'm not ready</button>
+                <button id="confirmAscension" class="ascend-btn">ASCEND ✨</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Offline Modal -->
+    <div id="offlineModal" class="modal hidden">
+        <div class="modal-card offline-card">
+            <h2>😴 Welcome Back!</h2>
+            <p>You were gone for <strong id="offlineTime">0 minutes</strong>.</p>
+            <p style="color:#4ecdc4;font-size:1.4rem;font-weight:bold;margin-top:10px;">+<span id="offlineEarned">0</span> REPS</p>
+            <p id="offlineRestMsg" style="color:#ffd700;font-size:0.9rem;margin-top:8px;"></p>
+            <div class="modal-actions">
+                <button id="closeOfflineModal" class="help-btn">HELL YEAH 💪</button>
             </div>
         </div>
     </div>
